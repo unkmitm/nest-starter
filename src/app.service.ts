@@ -1,19 +1,16 @@
 import { Injectable } from '@nestjs/common';
-// import { ConfigService } from '@nestjs/config';
+import { LoggerService } from './logger/logger.service';
 
 @Injectable()
 export class AppService {
-  // constructor(private readonly configService: ConfigService) {}
+  private context = 'AppService';
+  constructor(private readonly logger: LoggerService) {}
 
   getHello(): any {
-    // const enviromentVariable = this.configService.get<string>('enviroment');
-    // console.log(enviromentVariable);
-
-    return {
-      data: 'Hello World',
-      meta: {
-        pages: 10,
-      },
-    };
+    this.logger.log('Message Recived', this.context, {
+      userId: 1,
+      isPremium: true,
+    });
+    return `${this.context}`;
   }
 }
